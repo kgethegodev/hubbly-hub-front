@@ -5,7 +5,7 @@ export default defineNuxtConfig({
     modules: [
         '@pinia/nuxt',
     ],
-      css: ['~/assets/scss/style.scss'],
+    css: ['~/assets/scss/style.scss'],
     vite: {
       css: {
           preprocessorOptions: {
@@ -15,4 +15,9 @@ export default defineNuxtConfig({
           }
       }
     },
+    runtimeConfig:{
+      public: {
+          api_url: process.env.API_URL
+      }
+    }
 })
