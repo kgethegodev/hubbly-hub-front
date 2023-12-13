@@ -8,7 +8,7 @@ export const useUserStore = defineStore("user", {
         user: this._user
     },
     actions: {
-        login(user) {
+        login(email, password) {
             this._user = user
         }
     }
