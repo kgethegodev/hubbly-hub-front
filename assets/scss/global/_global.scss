@@ -1,0 +1,223 @@
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
+
+	body {
+		font-size: 1.6rem;
+		font-family: 'Montserrat', sans-serif;
+		color: var(--color-secondary);
+		transition: 0.3s ease-in-out;
+
+		h1{
+			@include font(4.8,null,black);
+			margin-bottom: 1rem;
+
+			@include break-point(mobile){
+				font-size: 3.8rem;
+			}
+		}
+
+		h2{
+			@include font(3.6,null,black);
+			color: var(--color-accent);
+			margin-bottom: 2rem;
+
+			@include break-point(mobile){
+				font-size: 2.6rem;
+			}
+		}
+
+		h3{
+			@include font(2.4,null,light);
+			margin-bottom: 2rem;
+
+			@include break-point(mobile){
+				font-size: 1.6rem;
+			}
+		}
+
+		h4{
+			@include font(1.8,null,black);
+			margin-top: 4rem;
+			text-transform: lowercase;
+
+			@include break-point(mobile){
+				font-size: 1.6rem;
+			}
+		}
+
+		ul {
+			margin: 1rem 0;
+			li {
+				margin-left: 2rem;
+				margin-top: 1rem;
+				padding: 0 0 0 3rem;
+				position: relative;
+
+				strong {
+					color: var(--color-accent);
+				}
+
+				&::before {
+					content: "";
+					position: absolute;
+					height: 0.5rem;
+					width: 0.5rem;
+					display: inline-block;
+					background: var(--color-secondary);
+					left: 0;
+					top: 0.7rem;
+				}
+			}
+		}
+
+		p{
+			margin-bottom: 1rem;
+		}
+
+		.wrapper{
+			max-width: min(128rem,calc(100% - 3.2rem));
+			margin: 0 auto;
+
+			.content-block{
+				margin-bottom: 8rem;
+
+				@include break-point(mobile){
+					margin-bottom: 4rem;
+				}
+
+				&:last-child{
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		.socials-block{
+			display: flex;
+			gap: 2rem;
+
+			a{
+			  .icon{
+				transition: 0.3s ease-in-out;
+				width: 3.5rem;
+				height: 3.5rem;
+				fill: transparent;
+				stroke: var(--color-secondary);
+			  }
+
+			  &:hover{
+				.icon{
+				  stroke: var(--color-accent);
+				}
+			  }
+			}
+
+			.mode-icon{
+			  .icon{
+				stroke: var(--color-accent);
+			  }
+			  &:hover{
+				.icon{
+				  stroke: var(--color-secondary);
+				}
+			  }
+			}
+		}
+	}
+}
+
+//header
+header{
+  margin-bottom: 4rem;
+
+	.router-link-active{
+		color: var(--color-accent)!important;
+	}
+
+  .header-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 0;
+
+    .menu-links{
+      display: flex;
+      gap: 2rem;
+
+      a{
+        @include font(1.6,null,black);
+        color: var(--color-secondary);
+        transition: 0.3s ease-in-out;
+
+        &:hover{
+          color: var(--color-accent);
+        }
+      }
+    }
+
+    .logo-link{
+      .icon{
+        width: 7.9rem;
+        height: 5.9rem;
+        fill: var(--color-secondary);
+
+        @include break-point(mobile){
+          width: 4.3rem;
+          height: 3.9rem;
+        }
+      }
+    }
+
+    .hamburger-block{
+      a{
+        display: inline-block;
+        width: 2.6rem;
+        height: 2.6rem;
+        position: relative;
+
+        &:before, &:after, span{
+          height: 0.2rem;
+          width: 100%;
+          background: var(--color-accent);
+          position: absolute;
+        }
+
+         &:before, &:after{
+          content: '';
+          display: inline-block;
+        }
+
+        &:before{
+          top: 0.5rem;
+        }
+
+        &:after{
+          bottom: 0.5rem;
+        }
+
+        span{
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+
+  .hide-mobile{
+    @include break-point(mobile){
+      display: none!important;
+    }
+  }
+
+  .show-mobile{
+    display: none!important;
+    @include break-point(mobile){
+      display: block!important;
+    }
+  }
+}
+
+//footer
+footer{
+  margin-top: 4rem;
+}

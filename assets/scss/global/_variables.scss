@@ -1,0 +1,20 @@
+:root {
+
+  //Colors
+  --color-primary:    #F2F2F2;
+  --color-secondary:  #262626;
+  --color-accent:     #BFB3A8;
+  --color-black:      #0D0D0D;
+
+  //Font weights
+  --font-weight-light:		100;
+  --font-weight-book:		400;
+  --font-weight-medium: 	500;
+  --font-weight-black: 	    600;
+}
+
+html[color-mode='light'] {
+    //Colors
+  --color-primary:    #F2F2F2;
+  --color-secondary:  #262626;
+}

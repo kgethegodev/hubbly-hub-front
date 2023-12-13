@@ -1,0 +1,46 @@
+@mixin font($size, $lineHeight: null, $weight: null) {
+	font-size: #{$size}rem;
+	@if $lineHeight {
+		line-height: #{$lineHeight}rem;
+	}
+	@if $weight {
+		font-weight: var(--font-weight-#{$weight});
+	}
+}
+
+@mixin break-point($point) {
+
+	$mobile: "(max-width: 600px)";
+	$tablet-portrait: "(max-width: 768px)";
+	$tablet-md: "(max-width: 899px)";
+	$tablet-landscape: "(max-width: 1024px)";
+	$desktop-sm: "(max-width: 1320px)";
+	$desktop: "(min-width: 1024px)";
+
+	@if $point == desktop {
+		@media #{$desktop} {
+			@content;
+		}
+	} @else if $point == desktop-sm {
+		@media #{$desktop-sm} {
+			@content;
+		}
+	} @else if $point == tablet-landscape {
+		@media #{$tablet-landscape} {
+			@content;
+		}
+	} @else if $point == tablet-md {
+		@media #{$tablet-md} {
+			@content;
+		}
+	} @else if $point == tablet-portrait {
+		@media #{$tablet-portrait} {
+			@content;
+		}
+	} @else if $point == mobile {
+		@media #{$mobile}  {
+			@content;
+		}
+	}
+
+}
