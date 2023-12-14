@@ -2,21 +2,23 @@
 import {useUserStore} from "~/store/userStore.js";
 import {storeToRefs} from "pinia";
 const { authenticateUser  } = useUserStore();
-const { authenticated, authenticationError } = storeToRefs(useUserStore())
+const { authenticated } = storeToRefs(useUserStore())
 const email = ref('')
 const password = ref('')
+const loginError = ref([])
 
 const router = useRouter()
 const login = async () => {
-  // TODO: handle errors and redirection
-  await authenticateUser(email.value,password.value)
+  loginError.value = []
 
-  if(authenticated){
-    router.push('/')
+  try{
+    await authenticateUser(email.value,password.value)
+    if(authenticated){
+      router.push('/')
+    }
   }
-
-  else if(authenticationError) {
-    console.log("Error: ", authenticationError)
+  catch (error){
+    loginError.value = error.value.data.data
   }
 }
 </script>
@@ -28,6 +30,14 @@ const login = async () => {
         <h1>Welcome to
         <span>the Hub</span>
         </h1>
+
+        <div class="error-block" v-if="loginError.length > 0">
+          <h2>Oooops! <br>Something went wrong.</h2>
+          <ul>
+            <li v-for="error in loginError">{{error}}</li>
+          </ul>
+        </div>
+
       <form action="">
         <div class="form-row">
           <hub-input type="email" name="email" :required="true" v-model="email"/>
@@ -76,7 +86,7 @@ const login = async () => {
          box-shadow: none;
          background: var(--color-accent);
          padding: 1rem;
-         border-radius: 2.4rem;
+         border-radius: 1rem;
          @include font(1.8,null,black);
        }
      }
@@ -87,6 +97,43 @@ const login = async () => {
     background: url("/images/login/hero.jpg") center center;
     background-size: cover;
     border-radius: 4rem 0 0 4rem;
+  }
+
+  @include break-point('tablet-portrait'){
+    flex-direction: column-reverse;
+
+    .login-hero{
+      width: calc(100% - 2rem);
+      border-radius: 2.4rem;
+      min-height: 20rem;
+      background: url("/images/login/hero.jpg") top center;
+      background-size: cover;
+      margin-bottom: 4rem;
+    }
+
+    .login-form{
+      width: 100%;
+    }
+  }
+}
+
+.error-block {
+  margin-bottom: 4rem;
+
+  *{
+    color: var(--color-red);
+  }
+
+  ul {
+
+    li {
+      padding-left: 0;
+      margin-left: 0;
+
+      &:before{
+        display: none;
+      }
+    }
   }
 }
 </style>

@@ -2,7 +2,6 @@ import {defineStore, acceptHMRUpdate} from "pinia";
 export const useUserStore = defineStore("user", {
     state: () => ({
         authenticated: false,
-        authenticationError: null
     }),
     actions: {
         /**
@@ -12,7 +11,6 @@ export const useUserStore = defineStore("user", {
          * @param password
          */
         async authenticateUser(email, password)  {
-            this.authenticationError = null
             const config = useRuntimeConfig().public
             const {data, error} = await useFetch(`${config.api_url}/login`, {
                     method: "POST",
@@ -23,8 +21,7 @@ export const useUserStore = defineStore("user", {
                 })
 
             if(error.value){
-                console.log("yall niggas got jokes today")
-                this.authenticationError = error.value
+                await Promise.reject(error)
                 return;
             }
 
