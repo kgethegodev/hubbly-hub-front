@@ -5,6 +5,10 @@ export default defineNuxtConfig({
     modules: [
         '@pinia/nuxt',
     ],
+    components: [
+        '~/components/form',
+        '~/components/global',
+    ],
     css: ['~/assets/scss/style.scss'],
     vite: {
       css: {

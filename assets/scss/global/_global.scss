@@ -6,14 +6,19 @@ html {
 		font-size: 1.6rem;
 		font-family: 'Montserrat', sans-serif;
 		color: var(--color-secondary);
+		background: var(--color-primary);
 		transition: 0.3s ease-in-out;
 
 		h1{
 			@include font(4.8,null,black);
-			margin-bottom: 1rem;
+			margin-bottom: 4rem;
 
 			@include break-point(mobile){
 				font-size: 3.8rem;
+			}
+
+			span{
+				display: block;
 			}
 		}
 

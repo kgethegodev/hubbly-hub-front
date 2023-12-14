@@ -1,8 +1,8 @@
 import {defineStore, acceptHMRUpdate} from "pinia";
-import {useCookie} from "#app";
 export const useUserStore = defineStore("user", {
     state: () => ({
-        authenticated: false
+        authenticated: false,
+        authenticationError: null
     }),
     actions: {
         /**
@@ -11,24 +11,28 @@ export const useUserStore = defineStore("user", {
          * @param email
          * @param password
          */
-        login(email, password)  {
+        async authenticateUser(email, password)  {
+            this.authenticationError = null
             const config = useRuntimeConfig().public
-            useAsyncData('user-login', async () => {
-                await $fetch(`${config.api_url}/login`, {
+            const {data, error} = await useFetch(`${config.api_url}/login`, {
                     method: "POST",
                     body: {
                         'email': email,
                         'password': password
                     }
-                }).then(res => {
-                    const token = useCookie('token')
-                    token.value = res?.data?.token
-                    this.authenticated = true
-                }).catch(err => {
-                    // TODO: Handle Error
-                    console.log('The error: ', err)
                 })
-            })
+
+            if(error.value){
+                console.log("yall niggas got jokes today")
+                this.authenticationError = error.value
+                return;
+            }
+
+            if(data.value && !error.value){
+                const token = useCookie('token')
+                token.value = data.value?.data?.token
+                this.authenticated = true
+            }
         },
 
         /**

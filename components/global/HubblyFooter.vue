@@ -2,8 +2,7 @@
 
 <template>
 <footer>
-  <div class="wrapper">clear
-
+  <div class="wrapper">
     <p>copyright text</p>
   </div>
 </footer>
